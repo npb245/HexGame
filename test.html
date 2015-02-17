@@ -6,13 +6,14 @@
   <script>
   angular.module('myApp')
   .run(function(gameLogic) {
-     //var move = gameLogic.createMove(undefined, 0, 0, 0);
-     //console.log("move=", move);
-    // var params = {turnIndexBeforeMove: 0,
-    //   stateBeforeMove: {},
-    //   move: move};
-    // var res = gameLogic.isMoveOk(params);
-    // console.log("params=", params, "result=", res);
+
+     var move = gameLogic.createMove(undefined, 0, 0, 0);
+     console.log("move=", move);
+     var params = {turnIndexBeforeMove: 0,
+       stateBeforeMove: {},
+       move: move};
+     var res = gameLogic.isMoveOk(params);
+     console.log("params=", params, "result=", res);
     var board2 = [['B', '', '', '', '', '', '', 'R', 'R', '', ''], ['B', 'B', '', '', '', '', 'R', '', '', '', ''], ['', 'B', 'B', '', '', 'R', '', '', '', '', ''],
     ['', '', 'B', '', 'R', '', '', '', '', '', ''], ['', 'B', '', '', 'R', '', '', '', '', '', ''], ['', 'B', 'R', 'B', 'B', '', '', '', '', 'B', 'B'],
     ['', '', 'R', '', 'B', 'B', 'B', 'B', 'B', '', ''], ['', '', 'R', '', '', '', '', '', '', '', ''], ['', '', 'R', '', '', '', '', '', '', '', ''], 

@@ -3,7 +3,7 @@
 angular.module('myApp', []).factory('gameLogic', function() {
 
 
-  /** Returns the initial TicTacToe board, which is a 3x3 matrix containing ''. */
+  /** Returns the initial Hex board, which is a 3x3 matrix containing ''. */
   function getInitialBoard() {
     return [['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
@@ -12,29 +12,26 @@ angular.module('myApp', []).factory('gameLogic', function() {
   }
 
 
+  /*
+	Checks whether there is a winner for the current board starting from cell rowxcol for the given color
+  */
   function checkWinner(board,row,col,color){
   	var visited = [];
   	var sequence = [[row,col]];
-  	var frontier = [];
-  	frontier.push([row,col]);
+  	var queue = [];
+  	queue.push([row,col]);
   	var from = [];
   	from[[row,col]]=[[-1,-1]];
 
-  	while (frontier.length>0) {
-  		var current = frontier.shift();
+  	//Perform search in the queue for finding a path
+  	while (queue.length>0) {
+  		var current = queue.shift();
   		var cells = getAdjacentCell(board,current[0],current[1]);
-  		console.log('cells=',cells);
   		for (var next in cells) {
-  			//console.log('next=',cells[next]);
-  			//console.log(Object.keys(from));
-  			
   		 	var v = Object.keys(from);
-
   		 	if(cells[next] in from == false)
-  			//if (cells[next] in Object.keys(from)) 
   			{
-  				//console.log('hhere');
-  				frontier.push(cells[next]);
+  				queue.push(cells[next]);
   				from[cells[next]] = current;
   			}
   		}
@@ -43,43 +40,50 @@ angular.module('myApp', []).factory('gameLogic', function() {
   	return from;
   }
 
+  /*
+	Checks for a horizontal win for color blue
+  */
   function getHorizontalWin(board,row,col,color) {
    var from = checkWinner(board,row,col,color);
-   console.log('from horizontal=',from);	
+  
    var max = -1;
    var v = Object.keys(from);
    for(var f in v){
    		var x = v[f]
    		var col = x.split(',');
-   		console.log('x=',col[1]);
+   	
    		if(col[1] == 10) {
-   			console.log('win')
+   	
    			return true;
    		}
    }
-   console.log('not win')
+   
    return false;
   }
 
-
-  function getVerticalWin(board,row,col,color) {
-var from = checkWinner(board,row,col,color)	
-console.log('from vert=',from);
-   var max = -1;
-   var v = Object.keys(from);
-   for(var f in v){
-   		var x = v[f]
-   		var col = x.split(',');
-   		console.log('x=',col[0]);
-   		if(col[0] == 10) {
-   			console.log('win')
-   			return true;
-   		}
-   }
-   console.log('not win')
-   return false;
+  /*
+	Checks for a vertical win for color red
+  */
+ function getVerticalWin(board,row,col,color) {
+	var from = checkWinner(board,row,col,color)	
+	
+	var max = -1;
+	var v = Object.keys(from);
+	for(var f in v){
+		var x = v[f]
+		var col = x.split(',');
+	
+		if(col[0] == 10) {
+			return true;
+		}
+	}
+	
+	return false;
   }
 
+/*
+	Checks if there is a winner with the current board configuration
+*/
 function getWinner (board) {
   		
   		for(var i=0;i<10;i++) {
@@ -100,7 +104,17 @@ function getWinner (board) {
   
 
 
+/*
+	Gets the cells adjacent to a given cell with the same color
+	Possible adjacent x for cell y. Here (1,y,6) (2,4) and (3,5) belong to a particular column.
 
+		1 		2
+		
+	3 		y 		4
+
+		5 		6
+
+*/
 function getAdjacentCell(board,row,col){
   	var cells = [];
   	if(limits(row-1) && limits(col) && (board[row-1][col] === board[row][col])) {
@@ -115,9 +129,7 @@ function getAdjacentCell(board,row,col){
   	if(limits(row) && limits(col+1) && (board[row][col+1] == board[row][col])) {
   		cells.push([row,col+1]);
   	}
-  	if(row == 4 && col == 4) {
-  		console.log('here')
-  	}
+  	
   	if(limits(row+1) && limits(col-1) && (board[row+1][col-1] == board[row][col])) {
   		cells.push([row+1,col-1]);
   	}
@@ -127,40 +139,6 @@ function getAdjacentCell(board,row,col){
   	return cells;
   }
 
-
-  
-  /*
-  	Possible adjacent x for cell y. Here (1,y,6) (2,4) and (3,5) belong to a particular column.
-
-		1   2
-		
-	  3	  y   4
-
-	    5   6
-
-  */
-  function getAdjacentCell1(row,col){
-  	
-  	if(limits(row-1) && limits(col) && (board[row+1][col] === board[row][col])) {
-  		return [row-1,col];
-  	}	
-  	if(limits(row-1) && limits(col+1) && (board[row-1][col+1] === board[row][col])) {
-  		return [row-1,col+1];
-  	}
-  	if(limits(row) && limits(col-1) && (board[row][col-1] == board[row][col])) {
-  		return [row,col-1];
-  	}
-  	if(limits(row) && limits(col+1) && (board[row][col+1] == board[row][col])) {
-  		return [row,col+1];
-  	}
-  	if(limits(row+1) && limits(col-1) && (board[row+1][col-1] == board[row][col])) {
-  		return [row+1,col-1];
-  	}
-  	if(limits(row+1) && limits(col) && (board[row+1][col] == board[row][col])) {
-  		return [row+1,col];
-  	}
-  	return [-1,-1];
-  }
 
   /*
 	Check whether the row or column indexed is valid
@@ -192,7 +170,9 @@ function getAdjacentCell(board,row,col){
     return possibleMoves;
   }
 
-
+  /*
+	Creates a move at rowxcol for turnIndex
+  */
   function createMove(board,row,col,turnIndexBeforeMove){
   	if(board === undefined){
   		board = getInitialBoard();
@@ -209,6 +189,7 @@ function getAdjacentCell(board,row,col){
 
   	var winner = getWinner(boardAfterMove);
   	var firstOperation;
+
   	//There is no tie in Hex
   	if(winner!=''){
   		firstOperation = {endMatch: {endMatchScores: (winner === 'R' ? [1, 0] : (winner === 'B' ? [0, 1] : [0, 0]))}}
@@ -238,8 +219,8 @@ function getAdjacentCell(board,row,col){
     ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], 
     ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', '']
       ]}},
-        {set: {key: 'delta', value: {row: 0, col: 0}}}]*/
-        
+        {set: {key: 'delta', value: {row: 0, col: 2}}}]*/
+
       var deltaValue = move[2].set.value;
       var row = deltaValue.row;
       var col = deltaValue.col;
@@ -263,7 +244,7 @@ return {
       checkWinner: checkWinner,
       getHorizontalWin: getHorizontalWin,
       getVerticalWin: getVerticalWin,
-      getWinner: getWinner
+      getWinner: getWinner,
       isMoveOk: isMoveOk
   };
 });
