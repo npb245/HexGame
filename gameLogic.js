@@ -28,7 +28,7 @@ angular.module('myApp', []).factory('gameLogic', function() {
   		var current = queue.shift();
   		var cells = getAdjacentCell(board,current[0],current[1]);
   		for (var next in cells) {
-  		 	var v = Object.keys(from);
+  		
   		 	if(cells[next] in from == false)
   			{
   				queue.push(cells[next]);
@@ -172,6 +172,7 @@ function getAdjacentCell(board,row,col){
     return possibleMoves;
   }
   */
+
   /*
 	Creates a move at rowxcol for turnIndex
   */
@@ -241,7 +242,7 @@ function getAdjacentCell(board,row,col){
 
 return {
       getInitialBoard: getInitialBoard,
-      getPossibleMoves: getPossibleMoves,
+      //getPossibleMoves: getPossibleMoves,
       createMove: createMove,
       checkWinner: checkWinner,
       getHorizontalWin: getHorizontalWin,

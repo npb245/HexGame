@@ -1,4 +1,4 @@
-describe("In TicTacToe", function() {
+describe("In Hex Game", function() {
   var _gameLogic;
 
   beforeEach(module("myApp"));
