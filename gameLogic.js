@@ -152,9 +152,11 @@ function getAdjacentCell(board,row,col){
 
 
   /**
+   * COMMENTED FOR TESTING PURPOSES
    * Returns all the possible moves for the given board and turnIndexBeforeMove.
    * Returns an empty array if the game is over.
    */
+  /*
   function getPossibleMoves(board, turnIndexBeforeMove) {
     var possibleMoves = [];
     var i, j;
@@ -169,7 +171,7 @@ function getAdjacentCell(board,row,col){
     }
     return possibleMoves;
   }
-
+  */
   /*
 	Creates a move at rowxcol for turnIndex
   */
