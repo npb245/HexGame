@@ -86,13 +86,13 @@ angular.module('myApp', []).factory('gameLogic', function() {
 */
 function getWinner (board) {
   		
-  		for(var i=0;i<10;i++) {
+  		for(var i=0;i<11;i++) {
   			if(board[i][0]=='B'&&getHorizontalWin(board,i,0,'B')) {
   				return 'B';
   			}
   		}
 
-  		for(var j=0;j<10;j++) {
+  		for(var j=0;j<11;j++) {
   			if(board[0][j]=='R'){ 
   				if(getVerticalWin(board,0,j,'R')) {
   				return 'R';
@@ -156,7 +156,7 @@ function getAdjacentCell(board,row,col){
    * Returns all the possible moves for the given board and turnIndexBeforeMove.
    * Returns an empty array if the game is over.
    */
-  /*
+  
   function getPossibleMoves(board, turnIndexBeforeMove) {
     var possibleMoves = [];
     var i, j;
@@ -171,7 +171,7 @@ function getAdjacentCell(board,row,col){
     }
     return possibleMoves;
   }
-  */
+  
 
   /*
 	Creates a move at rowxcol for turnIndex
@@ -242,7 +242,7 @@ function getAdjacentCell(board,row,col){
 
 return {
       getInitialBoard: getInitialBoard,
-      //getPossibleMoves: getPossibleMoves,
+      getPossibleMoves: getPossibleMoves,
       createMove: createMove,
       checkWinner: checkWinner,
       getHorizontalWin: getHorizontalWin,

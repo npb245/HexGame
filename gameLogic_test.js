@@ -99,6 +99,18 @@ describe("In Hex Game", function() {
         {set: {key: 'delta', value: {row: 10, col: 3}}}]);
   });
 
+  it("cannot getPossibleMoves after the game is over", function() {
+  var arr=[];
+var v1 = 
+    _gameLogic.getPossibleMoves( [['', '', 'R', '', '', '', '', '', 'B', 'R', ''], ['', '', 'R', '', '', '', '', 'B', 'R', '', ''], ['', 'R', '', '', 'B', 'B', '', '', '', '', ''],
+    ['', 'R', '', 'B', '', 'B', 'B', 'B', '', '', ''], ['', 'R', 'B', '', '', '', '', 'B', '', '', ''], ['B', 'R', 'R', '', '', '', '', 'B', 'B', 'B', 'B'],
+    ['', '', 'R', 'R', '', '', '', '', '', '', ''], ['', '', '', 'R', '', '', '', '', '', '', ''], ['', '', 'R', '', '', '', '', '', '', '', ''], 
+    ['', '', 'R', '', '', '', '', '', '', '', ''], ['', '', 'R', '', '', '', '', '', '', '', '']],0);
+var bool = angular.equals(v1,arr);
+expect(bool).toBe(true);
+    
+  });
+
   it("R wins by placing R in 10x2 is legal", function() {
     expectMoveOk(0,
       {board:
