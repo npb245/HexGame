@@ -66,8 +66,8 @@ angular.module('myApp')
     };
     $scope.getImageSrc = function (row, col) {
       var cell = $scope.board[row][col];
-      return cell === "R" ? "imgs/hexR.png"
-          : cell === "B" ? "imgs/hexB.png" : "";
+      return cell === "R" ? "red.png"
+          : cell === "B" ? "blue.png" : "";
     };
     $scope.shouldSlowlyAppear = function (row, col) {
       return $scope.delta !== undefined &&
