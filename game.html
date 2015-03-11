@@ -34,14 +34,15 @@
 
 <div id="gameArea" >
   
+     <img src="imgs/border2.png" style="position:absolute;left:0;width:100%;height:50%;">    
    <div ng-repeat="row in [0, 1, 2,3,4,5,6,7,8,9,10]"
-      style=";position:absolute; top:{{row * 3.8}}%; left:{{row*2.5}}%; width:5%; height:5%;">
-       <img ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
-      src = "imgs/hex.png" style="position:absolute; top:0; left:{{col * 100}}%; width:100%; height:100%;">
+      style="position:absolute; top:{{row * 3.8+3}}%; left:{{row*2.5+10}}%; width:5%; height:5%;">
+       <img ng-class="{piece:true}" ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
+      src = "UI/hex2.png" style="position:absolute; top:3%; left:{{col * 100+4.5}}%; width:100%; height:100%;">
     <div ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
-        style="position:absolute; top:15%; left:{{col * 100+10}}%; width:80%; height:70%;"
-        
+        style="position:absolute; top:18%; left:{{col * 100+10+4.5}}%; width:80%; height:70%;"
         ng-click="cellClicked(row, col)"
+        id="{{'e2e_test_div_' + row + 'x' + col}}"
        >
       <img ng-class="{piece: true, slowlyAppear: shouldSlowlyAppear(row, col)}"
           ng-show="shouldShowImage(row, col)"
