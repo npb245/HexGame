@@ -44,7 +44,7 @@
         ng-click="cellClicked(row, col)"
         id="{{'e2e_test_div_' + row + 'x' + col}}"
        >
-      <img ng-class="{piece: true, 
+      <img ng-class="{piece: true, slowlyAppear: shouldSlowlyAppear(row, col)
      
     }"
           ng-show="shouldShowImage(row, col)"
