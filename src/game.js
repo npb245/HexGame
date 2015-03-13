@@ -11,9 +11,9 @@ angular.module('myApp')
 
     function sendComputerMove() {
       var possMoves = gameLogic.getPossibleMoves($scope.board,$scope.turnIndex);
-      console.log('Possible Moves=',possMoves);
+      //console.log('Possible Moves=',possMoves);
       var randomNo = Math.floor(Math.random()*possMoves.length);
-      console.log('random move=',possMoves[randomNo]);
+      //console.log('random move=',possMoves[randomNo]);
       gameService.makeMove(possMoves[randomNo]); 
      
       // gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
@@ -22,6 +22,8 @@ angular.module('myApp')
     }
 
     function updateUI(params) {
+
+      
       $scope.board = params.stateAfterMove.board;
       $scope.delta = params.stateAfterMove.delta;
       if ($scope.board === undefined) {
