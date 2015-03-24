@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ./gameLogic.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="prettify.css">
+    <link rel="stylesheet" href="base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">./gameLogic.js</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(104 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">98.44% <small>(63 / 64)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(11 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(104 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="index.html">All files</a> &#187; <a href="index.html">./</a> &#187; gameLogic.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2318</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1159</span>
+<span class="cline-any cline-yes">1159</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">206</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">98</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">98</span>
+<span class="cline-any cline-yes">98</span>
+<span class="cline-any cline-yes">98</span>
+<span class="cline-any cline-yes">111</span>
+<span class="cline-any cline-yes">111</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">111</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">97</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">1254</span>
+<span class="cline-any cline-yes">1254</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1254</span>
+<span class="cline-any cline-yes">93</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">1183</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">107</span>
+<span class="cline-any cline-yes">433</span>
+<span class="cline-any cline-yes">108</span>
+<span class="cline-any cline-yes">93</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">763</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">198</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">198</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">198</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">198</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-yes">763</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1365</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">15978</span>
+<span class="cline-any cline-yes">15358</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">620</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">121</span>
+<span class="cline-any cline-yes">121</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">31</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">100</span>
+<span class="cline-any cline-yes">92</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">11</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+angular.module('myApp', []).factory('gameLogic', function() {
+&nbsp;
+&nbsp;
+  /** Returns the initial Hex board, which is a 3x3 matrix containing ''. */
+  function getInitialBoard() {
+    return [['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], 
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', '']];
+  }
+&nbsp;
+&nbsp;
+  /*
+	Checks whether there is a winner for the current board starting from cell rowxcol for the given color
+  */
+  function checkWinner(board,row,col,color){
+  	var visited = [];
+  	var sequence = [[row,col]];
+  	var queue = [];
+  	queue.push([row,col]);
+  	var from = [];
+  	from[[row,col]]=[[-1,-1]];
+&nbsp;
+  	//Perform search in the queue for finding a path
+  	while (queue.length&gt;0) {
+  		var current = queue.shift();
+  		var cells = getAdjacentCell(board,current[0],current[1]);
+  		for (var next in cells) {
+  		
+  		 	if(cells[next] in from == false)
+  			{
+  				queue.push(cells[next]);
+  				from[cells[next]] = current;
+  			}
+  		}
+  	}
+  	
+  	return from;
+  }
+&nbsp;
+  /*
+	Checks for a horizontal win for color blue
+  */
+  function getHorizontalWin(board,row,col,color) {
+   var from = checkWinner(board,row,col,color);
+  
+   var max = -1;
+   var v = Object.keys(from);
+   for(var f in v){
+   		var x = v[f]
+   		var col = x.split(',');
+   	
+   		if(col[1] == 10) {
+   	
+   			return true;
+   		}
+   }
+   
+   return false;
+  }
+&nbsp;
+  /*
+	Checks for a vertical win for color red
+  */
+ function getVerticalWin(board,row,col,color) {
+	var from = checkWinner(board,row,col,color)	
+	
+	var max = -1;
+	var v = Object.keys(from);
+	for(var f in v){
+		var x = v[f]
+		var col = x.split(',');
+	
+		if(col[0] == 10) {
+			return true;
+		}
+	}
+	
+	return false;
+  }
+&nbsp;
+/*
+	Checks if there is a winner with the current board configuration
+*/
+function getWinner (board) {
+  		
+  		for(var i=0;i&lt;11;i++) {
+  			if(board[i][0]=='B'&amp;&amp;getHorizontalWin(board,i,0,'B')) {
+  				return 'B';
+  			}
+  		}
+&nbsp;
+  		for(var j=0;j&lt;11;j++) {
+  			if(board[0][j]=='R'){ 
+  				if(getVerticalWin(board,0,j,'R')) {
+  				return 'R';
+  			}}
+  		}
+&nbsp;
+  		return '';
+  	}
+  
+&nbsp;
+&nbsp;
+/*
+	Gets the cells adjacent to a given cell with the same color
+	Possible adjacent x for cell y. Here (1,y,6) (2,4) and (3,5) belong to a particular column.
+&nbsp;
+		1 		2
+		
+	3 		y 		4
+&nbsp;
+		5 		6
+&nbsp;
+*/
+function getAdjacentCell(board,row,col){
+  	var cells = [];
+  	if(limits(row-1) &amp;&amp; limits(col) &amp;&amp; (board[row-1][col] === board[row][col])) {
+  		cells.push([row-1,col]);
+  	}	
+  	if(limits(row-1) &amp;&amp; limits(col+1) &amp;&amp; (board[row-1][col+1] === board[row][col])) {
+  		cells.push([row-1,col+1]);
+  	}
+  	if(limits(row) &amp;&amp; limits(col-1) &amp;&amp; (board[row][col-1] == board[row][col])) {
+  		cells.push([row,col-1]);
+  	}
+  	if(limits(row) &amp;&amp; limits(col+1) &amp;&amp; (board[row][col+1] == board[row][col])) {
+  		cells.push([row,col+1]);
+  	}
+  	
+  	if(limits(row+1) &amp;&amp; limits(col-1) &amp;&amp; (board[row+1][col-1] == board[row][col])) {
+  		cells.push([row+1,col-1]);
+  	}
+  	if(limits(row+1) &amp;&amp; limits(col) &amp;&amp; (board[row+1][col] == board[row][col])) {
+  		cells.push([row+1,col]);
+  	}
+  	return cells;
+  }
+&nbsp;
+&nbsp;
+  /*
+	Check whether the row or column indexed is valid
+  */
+  function limits(num){
+  	if(num &gt;= 0 &amp;&amp; num &lt;11){
+  		return true;
+  	}
+  	return false;
+  }
+&nbsp;
+&nbsp;
+  /**
+   * COMMENTED FOR TESTING PURPOSES
+   * Returns all the possible moves for the given board and turnIndexBeforeMove.
+   * Returns an empty array if the game is over.
+   */
+  
+  function getPossibleMoves(board, turnIndexBeforeMove) {
+    var possibleMoves = [];
+    var i, j;
+    for (i = 0; i &lt; 11; i++) {
+      for (j = 0; j &lt; 11; j++) {
+        try {
+          possibleMoves.push(createMove(board, i, j, turnIndexBeforeMove));
+        } catch (e) {
+          // The cell in that position was full.
+        }
+      }
+    }
+    return possibleMoves;
+  }
+  
+&nbsp;
+  /*
+	Creates a move at rowxcol for turnIndex
+  */
+  function createMove(board,row,col,turnIndexBeforeMove){
+  	if(board === undefined){
+  		board = getInitialBoard();
+  	}
+  	if(board[row][col]!=''){
+  		throw new Error('The position is not empty!');
+  	}
+  	if(getWinner(board)!=''){
+  		throw new Error('The game has ended already!');
+  	}
+&nbsp;
+  	var boardAfterMove = angular.copy(board);
+  	boardAfterMove[row][col] = turnIndexBeforeMove === 0? 'R':'B';
+&nbsp;
+  	var winner = getWinner(boardAfterMove);
+  	var firstOperation;
+&nbsp;
+  	//There is no tie in Hex
+  	if(winner!=''){
+  		firstOperation = {endMatch: {endMatchScores: (winner === 'R' ? [1, 0] : (winner === 'B' ? [0, 1] : <span class="branch-1 cbranch-no" title="branch not covered" >[0, 0])</span>)}}
+  	} 
+  	else {
+  		  firstOperation = {setTurn: {turnIndex: 1 - turnIndexBeforeMove}};
+  	}
+  	return [firstOperation,
+  	{set:{key:'board',value:boardAfterMove}},
+  	{set:{key:'delta',value:{row: row,col:col}}}]
+  }
+&nbsp;
+&nbsp;
+  function isMoveOk(params) {
+    var move = params.move;
+    var turnIndexBeforeMove = params.turnIndexBeforeMove;
+    var stateBeforeMove = params.stateBeforeMove;
+    
+    // We can assume that turnIndexBeforeMove and stateBeforeMove are legal, and we need
+    // to verify that move is legal.
+    try {
+      // Example move:
+      // [{setTurn: {turnIndex : 1},
+      /*  {set: {key: 'board', value: [['', '', 'R', '', '', '', '', '', '', '', ''], 
+      ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', ''], 
+    ['', '', '', '', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '', '', '', '']
+      ]}},
+        {set: {key: 'delta', value: {row: 0, col: 2}}}]*/
+&nbsp;
+      var deltaValue = move[2].set.value;
+      var row = deltaValue.row;
+      var col = deltaValue.col;
+      var board = stateBeforeMove.board;
+      var expectedMove = createMove(board, row, col, turnIndexBeforeMove);
+      if (!angular.equals(move, expectedMove)) {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+    return true;
+  }
+&nbsp;
+&nbsp;
+&nbsp;
+return {
+      getInitialBoard: getInitialBoard,
+      getPossibleMoves: getPossibleMoves,
+      createMove: createMove,
+      checkWinner: checkWinner,
+      getHorizontalWin: getHorizontalWin,
+      getVerticalWin: getVerticalWin,
+      getWinner: getWinner,
+      isMoveOk: isMoveOk
+  };
+});</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 24 2015 17:15:21 GMT-0400 (EDT)</div>
+</div>
+<script src="prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="sorter.js"></script>
+</body>
+</html>
