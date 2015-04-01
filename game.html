@@ -33,11 +33,25 @@
 <body ng-cloak ng-controller="Ctrl">
 
 <div id="gameArea" >
-  
-     <img src="imgs/border.png" style="position:absolute;left:0;width:100%;height:51%;">    
+      <svg id="draggingLines" width="100%" height="51%"
+        style="display:none; position:absolute; z-index: 30;">
+      <line id="horizontalDraggingLine"
+            x1="1" y1="13.5%"
+            x2="100%" y2="12.5%"
+            stroke="black"
+            stroke-width="1%"/>
+      <line id="verticalDraggingLine"
+            y1="0" x1="12.5%"
+            y2="100%" x2="40.5%"
+            stroke="black"
+            stroke-width="1%"/>
+    </svg>
+    </svg>
+     <img src="imgs/border.png" id='border' style="position:absolute;left:0;width:100%;height:51%;">  
+     <div id='game'>  
   <div ng-repeat="row in [0, 1, 2,3,4,5,6,7,8,9,10]"
       style="position:absolute; top:{{row * 3.8+3.5}}%; left:{{row*2.5+10}}%; width:5%; height:5%;">
-       <img ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
+       <img id="hexagon" ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
       src = "imgs/hexagon.png" style="position:absolute; top:7%; left:{{col * 100+5}}%; width:100%; height:100%;">
     <div ng-repeat="col in [0, 1, 2,3,4,5,6,7,8,9,10]"
         style="position:absolute; top:25%; left:{{col * 100+10+9.5}}%; width:70%; height:63%;"
@@ -53,6 +67,8 @@
           >
     </div>
   </div>
+
+</div>
   </div>
 
 
