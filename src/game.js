@@ -39,8 +39,10 @@ angular.module('myApp')
      var gameArea = document.getElementById("gameArea");
      
      var rowsNum = 13;
-     var colsNum = 15;
+     
+     //extra columns for a square shape
      var colsNum = 16;
+
      window.handleDragEvent = handleDragEvent;
      function handleDragEvent(type, clientX, clientY) {
        // Center point in gameArea
@@ -50,9 +52,7 @@ angular.module('myApp')
        //Use width and height of border image
        var w = document.getElementById('border').width;
        var h = document.getElementById('border').height;
-       //document.getElementById('extradiv').style.width = ""
-       // x = x - document.getElementById('extradiv').style.width;
-       // y = y-document.getElementById('extradiv').style.height;
+      
        // Is outside gameArea?
        if (x < 0 || y < 0 || x >= w || y >= h) {
         // clickToDragPiece.style.display = "none";
@@ -101,6 +101,11 @@ angular.module('myApp')
        verticalDraggingLine.setAttribute("x2",  centerXY.x);
        horizontalDraggingLine.setAttribute("y1", centerXY.y);
        horizontalDraggingLine.setAttribute("y2", centerXY.y);
+     
+       //rotate vertical line
+       //var rot = "rotate(-34.5 "+Math.floor(centerXY.x)+" "+Math.floor(centerXY.y)+")";
+        //verticalDraggingLine.setAttribute("transform",rot);
+       
        var topLeft = getSquareTopLeft(row, col);
       // clickToDragPiece.style.left = topLeft.left + "px";
       // clickToDragPiece.style.top = topLeft.top + "px";
@@ -118,7 +123,7 @@ angular.module('myApp')
         var w1 = document.getElementById('hexagon').width;
        return {
 
-         // width: w1,
+        //width: w1,
          width : (rowsNum%2==0? (((w-10) / colsNum )- (colsNum * x)/2):w / colsNum),
          height : (rowsNum%2==0? (((h-50) / rowsNum )- (rowsNum * y)/2):h / rowsNum)
        };
