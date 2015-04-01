@@ -35,13 +35,13 @@ angular.module('myApp')
    var draggingLines = document.getElementById("draggingLines");
      var horizontalDraggingLine = document.getElementById("horizontalDraggingLine");
      var verticalDraggingLine = document.getElementById("verticalDraggingLine");
-   //  var clickToDragPiece = document.getElementById("clickToDragPiece");
+     var clickToDragPiece = document.getElementById("clickToDragPiece");
      var gameArea = document.getElementById("gameArea");
      
      var rowsNum = 13;
      
      //extra columns for a square shape
-     var colsNum = 16;
+     var colsNum = 11;
 
      window.handleDragEvent = handleDragEvent;
      function handleDragEvent(type, clientX, clientY) {
@@ -49,94 +49,190 @@ angular.module('myApp')
        
        var x = clientX - gameArea.offsetLeft;
        var y = clientY - gameArea.offsetTop;
+       console.log('old xy=',x,',',y);
+
+       var left_hex = document.getElementById('e2e_test_div_0x0').offsetLeft;
+       var top_hex = document.getElementById('e2e_test_div_0x0').offsetTop;
+       console.log('left top = ',left_hex);
+       console.log('left top = ',top_hex);
+       x = x - left_hex;
+       y = y - top_hex;
+       console.log('x,y=',x,',',y);
        //Use width and height of border image
        var w = document.getElementById('border').width;
        var h = document.getElementById('border').height;
       
        // Is outside gameArea?
-       if (x < 0 || y < 0 || x >= w || y >= h) {
-        // clickToDragPiece.style.display = "none";
+       if (x < 0 || y < 0 || x >= w || y >= h || x < left_hex ) {
+         clickToDragPiece.style.display = "none";
          draggingLines.style.display = "none";
          return;
        }
-      // clickToDragPiece.style.display = "inline";
+       clickToDragPiece.style.display = "inline";
        draggingLines.style.display = "inline";
-       
+       var size = document.getElementById('hexagon').height/2;
+        
        // Inside gameArea. Let's find the containing square's row and col
        var col  = Math.floor((colsNum * x) / w);
 
        var row  = Math.floor((rowsNum * y) / h);
+       
+       
        var oldcol = col;
        var oldrow = row;
        
-       console.log('old=',oldcol)
        
+         row = Math.floor((x * Math.sqrt(3)/3 - y / 3) / size);
+       col = Math.floor(y * 2/3 / size);
+       console.log('old=',oldrow,',',oldcol);
+
+        var RADIUS = document.getElementById('hexagon').clientWidth/2;
+        console.log('RADIUS=',RADIUS);
+        var SIDE = 3/2*RADIUS;
+         var ci = Math.floor(x/SIDE);
+         var HEIGHT = document.getElementById('hexagon').height;
+
+        var cx = x - SIDE*ci;
+
+        var ty = y - (ci % 2) * HEIGHT / 2;
+        var cj = Math.floor(ty/HEIGHT);
+        var cy = ty - HEIGHT*cj;
+
+        // if (cx > Math.abs(RADIUS / 2 - RADIUS * cy / HEIGHT)) {
+        //     col = ci;
+        //     row = cj;
+        // } else {
+        //     //setCellIndex(ci - 1, cj + (ci % 2) - ((cy < HEIGHT / 2) ? 1 : 0));
+        //     col = ci-1;
+        //     row = cj + (ci % 2) - ((cy < HEIGHT / 2) ? 1 : 0);
+        // }
+
+
+        x = (x - RADIUS) / document.getElementById('hexagon').clientWidth;
+
+        var t1 = y / RADIUS;
+        var t2 = Math.floor(x + t1);
+        var r = Math.floor((Math.floor(t1 - x) + t2) / 3); 
+        var q = Math.floor((Math.floor(2 * x + 1) + t2) / 3) - r;
+        row = r;
+        col =  q;
+         
+
+        var columns;
         if((row-1) == 0){
-          col = col-1;
+          columns = col+1;
         }
-        else if(row-1 == 1 || row-1 == 2 ) {
-          col = col - 1;
+        else if(row-1 == 1) {
+          columns = col + 1;
         }
-        else if(row-1 == 3){
-         col = col-2;
+        else if(row-1 == 2 || row-1 == 3){
+         columns = col+2;
 
         }
         else if(row-1 == 4 || row-1 == 5){
-          col = col-3;
+          columns = col+3;
         }
-        else if(row-1 == 6 || row-1 ==7 || row-1 ==8){
-          col = col-4;
+        else if(row-1 == 6 || row-1 ==7){
+          columns = col+4;
         }
-        else
-          col = col-5;
+        else if(row-1 ==8 || row-1 == 9)
+          columns = col+5;
+        else {
+          columns = col+6;
+        }
 
+       
 
-
-       if(col > 11){
+       if(col > 11 || row > 11 ){
         console.log('wrong col = ',col);
+        //draggingLines.style.display = "none";
+        //clickToDragPiece.style.display = "none";
        }
-       var centerXY = getSquareCenterXY(oldrow, oldcol);
+       var centerXY = getSquareCenterXY(row, columns);
        console.log(centerXY);
        verticalDraggingLine.setAttribute("x1", centerXY.x);
+       var centerXY1 = getSquareCenterXY(10,col+1);
        verticalDraggingLine.setAttribute("x2",  centerXY.x);
+       //verticalDraggingLine.setAttribute("y2",  centerXY1.y);
        horizontalDraggingLine.setAttribute("y1", centerXY.y);
        horizontalDraggingLine.setAttribute("y2", centerXY.y);
-     
+       if($scope.turnIndex === 1){
+        
+        horizontalDraggingLine.setAttribute("stroke","blue");
+       verticalDraggingLine.setAttribute("stroke","blue");
+      }
+      else {
+        horizontalDraggingLine.setAttribute("stroke","red");
+        verticalDraggingLine.setAttribute("stroke","red");
+      }
+         
        //rotate vertical line
-       //var rot = "rotate(-34.5 "+Math.floor(centerXY.x)+" "+Math.floor(centerXY.y)+")";
+       var rot = "rotate(-34.5 "+Math.floor(centerXY.x)+" "+Math.floor(centerXY.y)+")";
         //verticalDraggingLine.setAttribute("transform",rot);
        
-       var topLeft = getSquareTopLeft(row, col);
-      // clickToDragPiece.style.left = topLeft.left + "px";
-      // clickToDragPiece.style.top = topLeft.top + "px";
+       var topLeft = getSquareTopLeft(row, columns);
+      clickToDragPiece.style.left = topLeft.left + "px";
+      clickToDragPiece.style.top = topLeft.top + "px";
+
+       if(row < 2 && row > 9 ) {
+       draggingLines.style.display = "none";
+        clickToDragPiece.style.display = "none";             
+        return;
+    }
+
        if (type === "touchend" || type === "touchcancel" || type === "touchleave" || type === "mouseup") {
          // drag ended
-        // clickToDragPiece.style.display = "none";
+         clickToDragPiece.style.display = "none";
          draggingLines.style.display = "none";
-         dragDone(row-1, col);
+         dragDone(row-1, col-1);
        }
+
+      
+  
      }
      function getSquareWidthHeight() {
         var w = document.getElementById('border').width-5;
-        var h = document.getElementById('border').height-10;
-        //Use width of hexagon or calculate square
+        var h = document.getElementById('border').height;
+        //Use width of hexagon or calculate square?
         var w1 = document.getElementById('hexagon').width;
+        var h1 = document.getElementById('hexagon').height;
        return {
 
-        //width: w1,
-         width : (rowsNum%2==0? (((w-10) / colsNum )- (colsNum * x)/2):w / colsNum),
-         height : (rowsNum%2==0? (((h-50) / rowsNum )- (rowsNum * y)/2):h / rowsNum)
+        width: w1,
+        //height: h1
+        // width : (rowsNum%2==0? (((w-10) / colsNum )- (colsNum * x)/2):w / colsNum),
+         height : h / rowsNum
+        
        };
      }
      function getSquareTopLeft(row, col) {
        var size = getSquareWidthHeight();
-       return {top: row * size.height+4, left: col * size.width+4}
+       if(row%2 == 0){
+          var left1 = col*size.width + (size.width/2);
+       }
+       else {
+          var left1 = col*size.width;
+       }
+       return {top: row * size.height, left: left1}
      }
      function getSquareCenterXY(row, col) {
-       var size = getSquareWidthHeight();
+       var size1 = getSquareWidthHeight();
+        // var x = size * Math.sqrt(3) * (row - 0.5 * (row&1));
+        // var size = document.getElementById('hexagon').height/2;
+        //  var y = size * 3/2 * col;
+       //  console.log('X Y CONVERTED=',x,',',y);
+       if(row%2 == 1){
+        var x1 = col * size1.width + size1.width / 2;
+
+       }
+       else{
+        var x1 = col * size1.width + size1.width;
+       }
        return {
-         x: col * size.width + size.width / 2+4,
-         y: row * size.height + size.height / 2+4
+        // x:Math.floor(x),
+        // y:Math.floor(y)
+         x: x1,
+         y: row * size1.height + size1.height / 2
        };
      }
        function isWhiteSquare(row, col) {
@@ -149,7 +245,6 @@ angular.module('myApp')
          }
          return res;
        }
-
 
 
 
@@ -223,9 +318,13 @@ angular.module('myApp')
       return cell === "R" ? "imgs/R.png"
           : cell === "B" ? "imgs/B.png" : "";
     };
-    $scope.shouldSlowlyAppear = function (row, col) {
-      return $scope.delta !== undefined &&
-          $scope.delta.row === row && $scope.delta.col === col;
+    // $scope.shouldSlowlyAppear = function (row, col) {
+    //   return $scope.delta !== undefined &&
+    //       $scope.delta.row === row && $scope.delta.col === col;
+    // };
+
+    $scope.getPreviewSrc = function () {
+      return  $scope.turnIndex === 1 ? "imgs/B.png" : "imgs/R.png";
     };
 
       function dragDone(row, col) {
@@ -237,6 +336,10 @@ angular.module('myApp')
         });
       }
    
+       $scope.rowsNum = rowsNum;
+    $scope.colsNum = colsNum;
+
+       
 
   var isMouseDown = false;
 
