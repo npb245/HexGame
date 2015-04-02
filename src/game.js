@@ -117,43 +117,28 @@ angular.module('myApp')
         row = r;
         col =  q;
          
-
-        var columns;
-        if((row-1) == 0){
-          columns = col+1;
-        }
-        else if(row-1 == 1) {
-          columns = col + 1;
-        }
-        else if(row-1 == 2 || row-1 == 3){
-         columns = col+2;
-
-        }
-        else if(row-1 == 4 || row-1 == 5){
-          columns = col+3;
-        }
-        else if(row-1 == 6 || row-1 ==7){
-          columns = col+4;
-        }
-        else if(row-1 ==8 || row-1 == 9)
-          columns = col+5;
-        else {
-          columns = col+6;
-        }
+        var columns = getColumn(row,col);
+        
 
        
 
-       if(col > 11 || row > 11 ){
+       if(col > 12 || col <= 0){
         console.log('wrong col = ',col);
-        //draggingLines.style.display = "none";
-        //clickToDragPiece.style.display = "none";
+        draggingLines.style.display = "none";
+        clickToDragPiece.style.display = "none";
        }
        var centerXY = getSquareCenterXY(row, columns);
+       var centerXY4 = getSquareCenterXY(0, columns);
        console.log(centerXY);
        verticalDraggingLine.setAttribute("x1", centerXY.x);
-       var centerXY1 = getSquareCenterXY(10,col+1);
+       verticalDraggingLine.setAttribute("y1", centerXY4.y);
+       var centerXY1 = getSquareCenterXY(12,col);
        verticalDraggingLine.setAttribute("x2",  centerXY.x);
-       //verticalDraggingLine.setAttribute("y2",  centerXY1.y);
+       verticalDraggingLine.setAttribute("y2",  centerXY1.y);
+       var centerXY2 = getSquareCenterXY(row, getColumn(row,0));
+       var centerXY3 = getSquareCenterXY(row, getColumn(row,12));
+       horizontalDraggingLine.setAttribute("x1", centerXY2.x);
+       horizontalDraggingLine.setAttribute("x2", centerXY3.x);
        horizontalDraggingLine.setAttribute("y1", centerXY.y);
        horizontalDraggingLine.setAttribute("y2", centerXY.y);
        if($scope.turnIndex === 1){
@@ -168,7 +153,7 @@ angular.module('myApp')
          
        //rotate vertical line
        var rot = "rotate(-34.5 "+Math.floor(centerXY.x)+" "+Math.floor(centerXY.y)+")";
-        //verticalDraggingLine.setAttribute("transform",rot);
+        verticalDraggingLine.setAttribute("transform",rot);
        
        var topLeft = getSquareTopLeft(row, columns);
       clickToDragPiece.style.left = topLeft.left + "px";
@@ -190,6 +175,34 @@ angular.module('myApp')
       
   
      }
+
+     function getColumn(row,col) {
+      var columns;
+
+        if((row-1) == 0){
+          columns = col+1;
+        }
+        else if(row-1 == 1) {
+          columns = col + 1;
+        }
+        else if(row-1 == 2 || row-1 == 3){
+         columns = col+2;
+
+        }
+        else if(row-1 == 4 || row-1 == 5){
+          columns = col+3;
+        }
+        else if(row-1 == 6 || row-1 ==7){
+          columns = col+4;
+        }
+        else if(row-1 ==8 || row-1 == 9)
+          columns = col+5;
+        else {
+          columns = col+6;
+        }
+        return columns;
+     }
+
      function getSquareWidthHeight() {
         var w = document.getElementById('border').width-5;
         var h = document.getElementById('border').height;
