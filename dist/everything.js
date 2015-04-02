@@ -268,7 +268,7 @@ return {
         }
       
         return res;
-      }
+      };
   
     $scope.getStyle = function (row, col) {
           var cell = $scope.board[row][col];
@@ -283,8 +283,8 @@ return {
                 "animation": "moveAnimation 2s"};
           }
           return {}; // no style
-        }
-   var draggingLines = document.getElementById("draggingLines");
+        };
+     var draggingLines = document.getElementById("draggingLines");
      var horizontalDraggingLine = document.getElementById("horizontalDraggingLine");
      var verticalDraggingLine = document.getElementById("verticalDraggingLine");
      var clickToDragPiece = document.getElementById("clickToDragPiece");
@@ -325,18 +325,13 @@ return {
        var size = document.getElementById('hexagon').height/2;
         
        // Inside gameArea. Let's find the containing square's row and col
-       var col  = Math.floor((colsNum * x) / w);
+       var col  = Math.floor(colsNum * x / w);
 
-       var row  = Math.floor((rowsNum * y) / h);
+       var row  = Math.floor(rowsNum * y / h);
        
+        row = Math.floor((x * Math.sqrt(3)/3 - y / 3) / size);
+        col = Math.floor(y * 2/3 / size);
        
-       var oldcol = col;
-       var oldrow = row;
-       
-       
-         row = Math.floor((x * Math.sqrt(3)/3 - y / 3) / size);
-       col = Math.floor(y * 2/3 / size);
-       console.log('old=',oldrow,',',oldcol);
 
         var RADIUS = document.getElementById('hexagon').clientWidth/2;
         console.log('RADIUS=',RADIUS);
@@ -350,62 +345,38 @@ return {
         var cj = Math.floor(ty/HEIGHT);
         var cy = ty - HEIGHT*cj;
 
-        // if (cx > Math.abs(RADIUS / 2 - RADIUS * cy / HEIGHT)) {
-        //     col = ci;
-        //     row = cj;
-        // } else {
-        //     //setCellIndex(ci - 1, cj + (ci % 2) - ((cy < HEIGHT / 2) ? 1 : 0));
-        //     col = ci-1;
-        //     row = cj + (ci % 2) - ((cy < HEIGHT / 2) ? 1 : 0);
-        // }
-
-
-        x = (x - RADIUS) / document.getElementById('hexagon').clientWidth;
+        x = (x - RADIUS) / document.getElementById('hexagon').clientHeight;
 
         var t1 = y / RADIUS;
         var t2 = Math.floor(x + t1);
         var r = Math.floor((Math.floor(t1 - x) + t2) / 3); 
         var q = Math.floor((Math.floor(2 * x + 1) + t2) / 3) - r;
+      
         row = r;
-        col =  q;
+        col = q;
          
-
-        var columns;
-        if((row-1) == 0){
-          columns = col+1;
-        }
-        else if(row-1 == 1) {
-          columns = col + 1;
-        }
-        else if(row-1 == 2 || row-1 == 3){
-         columns = col+2;
-
-        }
-        else if(row-1 == 4 || row-1 == 5){
-          columns = col+3;
-        }
-        else if(row-1 == 6 || row-1 ==7){
-          columns = col+4;
-        }
-        else if(row-1 ==8 || row-1 == 9)
-          columns = col+5;
-        else {
-          columns = col+6;
-        }
-
+        var columns = getColumn(row,col);
+        
+        console.log('row col = ',row,' ',col);
        
 
-       if(col > 11 || row > 11 ){
+       if(col > 12 || col <= 0){
         console.log('wrong col = ',col);
-        //draggingLines.style.display = "none";
-        //clickToDragPiece.style.display = "none";
+        draggingLines.style.display = "none";
+        clickToDragPiece.style.display = "none";
        }
        var centerXY = getSquareCenterXY(row, columns);
+       var centerXY4 = getSquareCenterXY(0, columns);
        console.log(centerXY);
        verticalDraggingLine.setAttribute("x1", centerXY.x);
-       var centerXY1 = getSquareCenterXY(10,col+1);
+       verticalDraggingLine.setAttribute("y1", centerXY4.y);
+       var centerXY1 = getSquareCenterXY(12,col);
        verticalDraggingLine.setAttribute("x2",  centerXY.x);
-       //verticalDraggingLine.setAttribute("y2",  centerXY1.y);
+       verticalDraggingLine.setAttribute("y2",  centerXY1.y);
+       var centerXY2 = getSquareCenterXY(row, getColumn(row,0));
+       var centerXY3 = getSquareCenterXY(row, getColumn(row,12));
+       horizontalDraggingLine.setAttribute("x1", centerXY2.x);
+       horizontalDraggingLine.setAttribute("x2", centerXY3.x);
        horizontalDraggingLine.setAttribute("y1", centerXY.y);
        horizontalDraggingLine.setAttribute("y2", centerXY.y);
        if($scope.turnIndex === 1){
@@ -420,7 +391,7 @@ return {
          
        //rotate vertical line
        var rot = "rotate(-34.5 "+Math.floor(centerXY.x)+" "+Math.floor(centerXY.y)+")";
-        //verticalDraggingLine.setAttribute("transform",rot);
+        verticalDraggingLine.setAttribute("transform",rot);
        
        var topLeft = getSquareTopLeft(row, columns);
       clickToDragPiece.style.left = topLeft.left + "px";
@@ -442,6 +413,35 @@ return {
       
   
      }
+
+     function getColumn(row,col) {
+      var columns;
+
+        if((row-1) === 0){
+          columns = col+1;
+        }
+        else if(row-1 === 1) {
+          columns = col + 1;
+        }
+        else if(row-1 === 2 || row-1 === 3){
+         columns = col+2;
+
+        }
+        else if(row-1 === 4 || row-1 === 5){
+          columns = col+3;
+        }
+        else if(row-1 === 6 || row-1 ===7){
+          columns = col+4;
+        }
+        else if(row-1 === 8 || row-1 === 9){
+          columns = col+5;
+        }
+        else {
+          columns = col+6;
+        }
+        return columns;
+     }
+
      function getSquareWidthHeight() {
         var w = document.getElementById('border').width-5;
         var h = document.getElementById('border').height;
@@ -459,36 +459,36 @@ return {
      }
      function getSquareTopLeft(row, col) {
        var size = getSquareWidthHeight();
-       if(row%2 == 0){
-          var left1 = col*size.width + (size.width/2);
+       var left1;
+       if(row%2 === 0){
+          left1 = col*size.width + (size.width/2);
        }
        else {
-          var left1 = col*size.width;
+          left1 = col*size.width;
        }
-       return {top: row * size.height, left: left1}
+       return {top: row * size.height, left: left1};
      }
      function getSquareCenterXY(row, col) {
        var size1 = getSquareWidthHeight();
+       var x1;
         // var x = size * Math.sqrt(3) * (row - 0.5 * (row&1));
         // var size = document.getElementById('hexagon').height/2;
         //  var y = size * 3/2 * col;
        //  console.log('X Y CONVERTED=',x,',',y);
-       if(row%2 == 1){
-        var x1 = col * size1.width + size1.width / 2;
+       if(row%2 === 1){
+          x1 = col * size1.width + size1.width / 2;
 
        }
        else{
-        var x1 = col * size1.width + size1.width;
+          x1 = col * size1.width + size1.width;
        }
        return {
-        // x:Math.floor(x),
-        // y:Math.floor(y)
          x: x1,
          y: row * size1.height + size1.height / 2
        };
      }
        function isWhiteSquare(row, col) {
-         return ((row+col)%2)==0;
+         return ((row+col)%2)===0;
        }
        function getIntegersTill(number) {
          var res = [];
@@ -570,10 +570,10 @@ return {
       return cell === "R" ? "imgs/R.png"
           : cell === "B" ? "imgs/B.png" : "";
     };
-    $scope.shouldSlowlyAppear = function (row, col) {
-      return $scope.delta !== undefined &&
-          $scope.delta.row === row && $scope.delta.col === col;
-    };
+    // $scope.shouldSlowlyAppear = function (row, col) {
+    //   return $scope.delta !== undefined &&
+    //       $scope.delta.row === row && $scope.delta.col === col;
+    // };
 
     $scope.getPreviewSrc = function () {
       return  $scope.turnIndex === 1 ? "imgs/B.png" : "imgs/R.png";
@@ -593,43 +593,6 @@ return {
 
        
 
-  var isMouseDown = false;
-
-  function touchHandler(event) {
-    var touch = event.changedTouches[0];
-    handleEvent(event, event.type, touch.clientX, touch.clientY);
-  }
-
-  function mouseDownHandler(event) {
-    isMouseDown = true;
-    handleEvent(event, "touchstart", event.clientX, event.clientY);
-  }
-
-  function mouseMoveHandler(event) {
-    if (isMouseDown) {
-      handleEvent(event, "touchmove", event.clientX, event.clientY);
-    }
-  }
-
-  function mouseUpHandler(event) {
-    isMouseDown = false;
-    handleEvent(event, "touchend", event.clientX, event.clientY);
-  }
-
-  function handleEvent(event, type, clientX, clientY) {
-    event.preventDefault();
-    console.log("handleDragEvent:", type, clientX, clientY);
-    handleDragEvent(type, clientX, clientY);
-  }
-
-  document.addEventListener("touchstart", touchHandler, true);
-  document.addEventListener("touchmove", touchHandler, true);
-  document.addEventListener("touchend", touchHandler, true);
-  document.addEventListener("touchcancel", touchHandler, true);
-  document.addEventListener("touchleave", touchHandler, true);
-  document.addEventListener("mousedown", mouseDownHandler, true);
-  document.addEventListener("mousemove", mouseMoveHandler, true);
-  document.addEventListener("mouseup", mouseUpHandler, true);
 
     gameService.setGame({
       gameDeveloperEmail: "npb245@nyu.edu",
