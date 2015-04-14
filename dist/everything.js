@@ -253,9 +253,9 @@ return {
 });;angular.module('myApp')
   .controller('Ctrl',
       ['$scope','$rootScope', '$log', '$timeout',
-       'gameService', 'stateService', 'gameLogic', 'resizeGameAreaService',
+       'gameService', 'stateService', 'gameLogic', 'aiService','resizeGameAreaService',
       function ($scope,$rootScope, $log, $timeout,
-        gameService, stateService, gameLogic, resizeGameAreaService) {
+        gameService, stateService, gameLogic, aiService, resizeGameAreaService) {
 
     'use strict';
 
@@ -505,8 +505,10 @@ return {
       //console.log('Possible Moves=',possMoves);
       var randomNo = Math.floor(Math.random()*possMoves.length);
       //console.log('random move=',possMoves[randomNo]);
-      gameService.makeMove(possMoves[randomNo]); 
-     
+     // gameService.makeMove(possMoves[randomNo]); 
+     gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
+           // at most 1 second for the AI to choose a move (but might be much quicker)
+           {millisecondsLimit: 2000}));
       // gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
       //     // at most 1 second for the AI to choose a move (but might be much quicker)
       //     {millisecondsLimit: 1000}));
@@ -602,6 +604,7 @@ return {
       updateUI: updateUI
     });
   }]);
+
 
 
 
