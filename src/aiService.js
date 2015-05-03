@@ -23,7 +23,7 @@ angular.module('myApp').factory('aiService',
         window.location.search === '?debug' ? getDebugStateToString : null,
         alphaBetaLimits);
   }
-
+  
   function getStateScoreForIndex0(move) { // alphaBetaService also passes playerIndex, in case you need it: getStateScoreForIndex0(move, playerIndex)
     if (move[0].endMatch) {
       var endMatchScores = move[0].endMatch.endMatchScores;

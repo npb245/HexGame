@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', []).factory('gameLogic', function() {
+angular.module('myApp', ['ngTouch', 'ui.bootstrap']).factory('gameLogic', function() {
 
 
   /** Returns the initial Hex board, which is a 3x3 matrix containing ''. */

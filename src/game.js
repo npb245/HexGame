@@ -1,9 +1,9 @@
 angular.module('myApp')
   .controller('Ctrl',
       ['$scope','$rootScope', '$log', '$timeout',
-       'gameService', 'stateService', 'gameLogic', 'aiService','resizeGameAreaService',
+       'gameService', 'stateService', 'gameLogic', 'aiService','resizeGameAreaService','dragAndDropService',
       function ($scope,$rootScope, $log, $timeout,
-        gameService, stateService, gameLogic, aiService, resizeGameAreaService) {
+        gameService, stateService, gameLogic, aiService,resizeGameAreaService ,dragAndDropService) {
 
     'use strict';
 
@@ -43,7 +43,8 @@ angular.module('myApp')
      //extra columns for a square shape
      var colsNum = 11;
 
-     window.handleDragEvent = handleDragEvent;
+     //window.handleDragEvent = handleDragEvent;
+     dragAndDropService.addDragListener("gameArea", handleDragEvent);
      function handleDragEvent(type, clientX, clientY) {
        // Center point in gameArea
        
