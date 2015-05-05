@@ -20,7 +20,8 @@ imgs/R.png
 imgs/hexagon.png
 
 NETWORK:
-dist/everything.min.js.map
-dist/everything.js
 languages/en.js
 languages/hn.js
+dist/everything.min.js.map
+dist/everything.js
+
