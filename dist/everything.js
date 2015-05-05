@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp', []).factory('gameLogic', function() {
+angular.module('myApp', ['ngTouch', 'ui.bootstrap']).factory('gameLogic', function() {
 
 
   /** Returns the initial Hex board, which is a 3x3 matrix containing ''. */
@@ -253,9 +253,9 @@ return {
 });;angular.module('myApp')
   .controller('Ctrl',
       ['$scope','$rootScope', '$log', '$timeout',
-       'gameService', 'stateService', 'gameLogic', 'aiService','resizeGameAreaService',
+       'gameService', 'stateService', 'gameLogic', 'aiService','resizeGameAreaService','dragAndDropService',
       function ($scope,$rootScope, $log, $timeout,
-        gameService, stateService, gameLogic, aiService, resizeGameAreaService) {
+        gameService, stateService, gameLogic, aiService,resizeGameAreaService ,dragAndDropService) {
 
     'use strict';
 
@@ -295,7 +295,8 @@ return {
      //extra columns for a square shape
      var colsNum = 11;
 
-     window.handleDragEvent = handleDragEvent;
+     //window.handleDragEvent = handleDragEvent;
+     dragAndDropService.addDragListener("gameArea", handleDragEvent);
      function handleDragEvent(type, clientX, clientY) {
        // Center point in gameArea
        
@@ -604,7 +605,6 @@ return {
       updateUI: updateUI
     });
   }]);
-
 
 
 
