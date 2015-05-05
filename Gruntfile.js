@@ -95,8 +95,8 @@ module.exports = function(grunt) {
             'http://yoav-zibin.github.io/emulator/main.css',
            
              'imgs/hexagon.png', 'imgs/R.png', 'imgs/B.png',
-           'imgs/HelpSlide1.png',
-            'imgs/HelpSlide2.png',
+           'imgs/Slide1.png',
+            'imgs/Slide2.png',
             'dist/everything.min.js',
             'game.css',
             
