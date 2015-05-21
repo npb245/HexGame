@@ -7,7 +7,7 @@ angular.module('myApp')
 
     'use strict';
 
-    resizeGameAreaService.setWidthToHeight(1);
+    resizeGameAreaService.setWidthToHeight(2);
 
     $scope.numbersTo=      function numbersTo(start,end) {
         var res = [];
@@ -254,10 +254,10 @@ angular.module('myApp')
       //console.log('Possible Moves=',possMoves);
       var randomNo = Math.floor(Math.random()*possMoves.length);
       //console.log('random move=',possMoves[randomNo]);
-      gameService.makeMove(possMoves[randomNo]); 
-     //gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
+     // gameService.makeMove(possMoves[randomNo]); 
+     gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
            // at most 1 second for the AI to choose a move (but might be much quicker)
-         //  {millisecondsLimit: 2000}));
+           {millisecondsLimit: 2000}));
       // gameService.makeMove(aiService.createComputerMove($scope.board, $scope.turnIndex,
       //     // at most 1 second for the AI to choose a move (but might be much quicker)
       //     {millisecondsLimit: 1000}));
@@ -353,6 +353,7 @@ angular.module('myApp')
       updateUI: updateUI
     });
   }]);
+
 
 
 
